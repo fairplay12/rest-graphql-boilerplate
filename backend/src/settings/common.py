@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # application apps
     'api',
+    'accounts',
 
     # installed apps
     'django_extensions',
