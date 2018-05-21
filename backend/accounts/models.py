@@ -15,5 +15,5 @@ class Employer(models.Model):
     user = models.OneToOneField(User, related_name='employer')
     is_super_employer = models.BooleanField(default=False)
 
-    def __str(self):
+    def __str__(self):
         return "{} {}".format(self.user.first_name, self.user.last_name)
