@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from accounts.models import Employee, Employer
+from jobs.models import Company
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -52,3 +53,14 @@ class EmployerSerializer(serializers.ModelSerializer):
         )
 
         return instance
+
+
+class CompanySerializer(serializers.ModelSerializer):
+    employees = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Company
+        fields = ('id', 'name', 'owner', 'employees')
+
+    def get_employees(self, company):
+        return UserSerializer(company.employees, many=True).data
