@@ -33,18 +33,18 @@ services:
             - ./backend/:/var/www/docker
             - ./frontend/:/var/www/docker/static/
             - ./downloads/:/var/www/downloads
-    jupyter:
-        build: ./backend/
-        container_name: docker-jupyter
-        working_dir: /var/www/docker
-        ports:
-            - 8080:8080
-        volumes:
-            - ./backend/:/var/www/docker
-            - ./frontend/:/var/www/docker/static/
-            - ./downloads/:/var/www/downloads
-        command: python manage.py shell_plus --notebook
-        env_file:
-            - .env
-        depends_on:
-            - database
+    # jupyter:
+    #     build: ./backend/
+    #     container_name: docker-jupyter
+    #     working_dir: /var/www/docker
+    #     ports:
+    #         - 8080:8080
+    #     volumes:
+    #         - ./backend/:/var/www/docker
+    #         - ./frontend/:/var/www/docker/static/
+    #         - ./downloads/:/var/www/downloads
+    #     command: python manage.py shell_plus --notebook
+    #     env_file:
+    #         - .env
+    #     depends_on:
+    #         - database
