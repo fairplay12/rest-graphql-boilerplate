@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from accounts.models import Employee, Employer
-from jobs.models import Company
+from jobs.models import Company, Business
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ('id', 'experience', 'user',)
+        fields = ('id', 'experience', 'company', 'user',)
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -60,7 +60,18 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('id', 'name', 'owner', 'employees')
+        fields = ('id', 'name', 'owner', 'business', 'employees')
 
     def get_employees(self, company):
-        return UserSerializer(company.employees, many=True).data
+        return EmployeeSerializer(company.employees, many=True).data
+
+
+class BusinessSerializer(serializers.ModelSerializer):
+    companies = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Business
+        fields = ('id', 'name', 'companies')
+
+    def get_companies(self, business):
+        return CompanySerializer(business.companies, many=True).data
