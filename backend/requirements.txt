@@ -28,7 +28,7 @@ ipywidgets==7.0.3
 iso8601==0.1.12
 itypes==1.1.0
 jedi==0.11.0
-Jinja2==2.9.6
+Jinja2==2.11.3
 jsonschema==2.6.0
 jupyter==1.0.0
 jupyter-client==5.1.0
